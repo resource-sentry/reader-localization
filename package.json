@@ -1,0 +1,28 @@
+{
+  "name": "@resource-sentry/reader-localization",
+  "version": "1.0.0",
+  "description": "Resource Sentry localization JSON reader.",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/resource-sentry/reader-localization.git"
+  },
+  "keywords": [
+    "localization",
+    "l10n",
+    "json",
+    "rs",
+    "resource-sentry",
+    "sentry",
+    "reader"
+  ],
+  "author": "Nicolas Siver",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/resource-sentry/reader-localization/issues"
+  },
+  "homepage": "https://github.com/resource-sentry/reader-localization#readme"
+}
