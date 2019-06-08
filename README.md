@@ -1,6 +1,7 @@
 # Reader: Localization
 
 Recursively walks through file-system and builds optimized SVG snippets ready to be injected in HTML.
+Reader complies with `RFC 5646`, `RFC 5234` specifications.
 
 ![Version](https://img.shields.io/npm/v/@resource-sentry/reader-localization.svg)
 ![Dependencies](https://david-dm.org/resource-sentry/reader-localization.svg)
@@ -12,6 +13,7 @@ Recursively walks through file-system and builds optimized SVG snippets ready to
 ## Configuration
 
 - `entry`, path to a directory with JSON language files.
+- `soft`, skips language tag validation
 
 ## Example: Language File
 
