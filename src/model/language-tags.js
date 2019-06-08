@@ -1,6 +1,9 @@
 module.exports = Object.freeze({
-    EXT_LANG: 'extlang',
-    LANGUAGE: 'language',
-    REGION  : 'region',
-    SCRIPT  : 'script'
+    EXT_LANGUAGE: 'extlang',
+    EXTENSION   : 'extension',
+    LANGUAGE    : 'language',
+    PRIVATE_USE : 'privateUse',
+    REGION      : 'region',
+    SCRIPT      : 'script',
+    VARIANT     : 'variant'
 });

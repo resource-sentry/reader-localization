@@ -106,7 +106,7 @@ class LanguageRegistry {
                     case LanguageTags.LANGUAGE:
                         this.languages[languageMeta.subtag] = languageMeta;
                         break;
-                    case LanguageTags.EXT_LANG:
+                    case LanguageTags.EXT_LANGUAGE:
                         this.extLanguages[languageMeta.subtag] = languageMeta;
                         break;
                     case LanguageTags.SCRIPT:
