@@ -1,3 +1,5 @@
+const Promise = require('bluebird');
+
 const convertObjectToKeyList = require('./util/convert-object-to-key-list');
 
 class KeyConsistency {
@@ -11,7 +13,7 @@ class KeyConsistency {
 
         for (i; i < len; ++i) {
             if (currentList[i] !== newList[i]) {
-                throw new Error(`Key "${currentList[i]}" can not be found`);
+                return Promise.reject(`Key "${currentList[i]}" can not be found`);
             }
         }
     }
@@ -25,9 +27,9 @@ class KeyConsistency {
             keyList = convertObjectToKeyList(language);
 
             if (keyList.length > this.currentStructure.length) {
-                throw new Error(`Extra keys found: "${keyList.slice(this.currentStructure.length).join(', ')}"`)
+                return Promise.reject(`Extra keys found: "${keyList.slice(this.currentStructure.length).join(', ')}"`)
             } else {
-                this.compare(this.currentStructure, keyList);
+                return this.compare(this.currentStructure, keyList);
             }
         }
     }
