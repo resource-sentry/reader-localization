@@ -12,6 +12,8 @@ Reader complies with `RFC 5646`, `RFC 5234` specifications.
 
 ## Configuration
 
+English is considered a default language.
+
 - `entry`, path to a directory with JSON language files.
 - `soft`, skips language tag validation
 
