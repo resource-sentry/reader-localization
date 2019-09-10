@@ -12,6 +12,7 @@ Reader complies with `RFC 5646`, `RFC 5234` specifications.
 
 This reader replaces the Reader for JSON key values.
 When the English language is analyzed, the same keys for texts will be created as if it would be used in Reader JSON.
+It's required that language files have the same structure, i.e. all languages have the same set of keys.
 
 ## Configuration
 
