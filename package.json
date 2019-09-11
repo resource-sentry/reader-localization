@@ -31,6 +31,6 @@
   "dependencies": {
     "@resource-sentry/utils": "^1.1.0",
     "bluebird": "^3.5.5",
-    "fast-glob": "^2.2.6"
+    "fast-glob": "^3.0.4"
   }
 }
