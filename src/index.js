@@ -1,9 +1,11 @@
-const Promise    = require('bluebird'),
-      fs         = require('fs'),
-      glob       = require('fast-glob'),
-      path       = require('path'),
-      BaseReader = require('@resource-sentry/utils/lib/base-reader'),
-      Categories = require('@resource-sentry/utils/lib/categories');
+const BaseReader   = require('@resource-sentry/utils/lib/base-reader'),
+      Promise      = require('bluebird'),
+      Categories   = require('@resource-sentry/utils/lib/categories'),
+      fs           = require('fs'),
+      glob         = require('fast-glob'),
+      Logger       = require('@resource-sentry/utils/lib/logger'),
+      ObjectWalker = require('@resource-sentry/utils/lib/object-walker'),
+      path         = require('path');
 
 const KeyConsistency   = require('./key-consistency'),
       LanguageRegistry = require('./service/language-registry'),
@@ -13,26 +15,8 @@ const KeyConsistency   = require('./key-consistency'),
 class LocalizationReader extends BaseReader {
     constructor(config) {
         super();
+        this.logger = Logger(this.constructor.name);
         this.config = config;
-    }
-
-    createEnglishTextKeys(content) {
-        let english = null;
-        let englishTag = /^en_*/;
-
-        for (let tag in content) {
-            if (englishTag.test(tag) === true) {
-                english = content[tag];
-            }
-        }
-
-        if (english === null) {
-            return Promise.reject('Can not find default (English) language.');
-        } else {
-            for (let key in english) {
-                this.addValue(Categories.TEXT, key, english[key]);
-            }
-        }
     }
 
     getEntry() {
@@ -48,8 +32,15 @@ class LocalizationReader extends BaseReader {
     }
 
     scan() {
-        let content = {};
+        let fileData, languageTag, values;
+        let english = null;
+        let englishTag = /^en_*/;
+        let fileContent = {};
         let entry = path.resolve(process.cwd(), this.getEntry());
+        // TODO Explore the possibility to have configuration for depth
+        let objectWalker = new ObjectWalker();
+
+        this.logger.verbose('Exploring language files in ' + entry);
 
         return Promise
             .resolve()
@@ -61,16 +52,35 @@ class LocalizationReader extends BaseReader {
                     .then(() => this.validateLanguageLegitimacy(files))
                     .then(() => {
                         files.forEach(filePath => {
-                            content = {
-                                [this.getLanguageTag(filePath)]: JSON.parse(fs.readFileSync(path.resolve(entry, filePath), 'utf8'))
-                            };
+                            fileData = JSON.parse(fs.readFileSync(path.resolve(entry, filePath), 'utf8'));
+                            fileContent[filePath] = fileData;
                         });
                     })
-                    .then(() => this.validateFileStructure(content))
-                    .then(() => this.createEnglishTextKeys(content))
+                    .then(() => this.validateFileStructure(fileContent))
                     .then(() => {
-                        for (let tag in content) {
-                            this.addValue(Categories.LANGUAGE, tag, content[tag]);
+                        for (let filePath in fileContent) {
+                            languageTag = this.getLanguageTag(filePath);
+                            values = objectWalker.setObject(fileContent[filePath]).getValues();
+
+                            values.sort((left, right) => {
+                                return left.key.localeCompare(right.key);
+                            });
+
+                            this.logger.verbose(`Registering "${languageTag}" language`);
+
+                            this.addValue(Categories.LANGUAGE, languageTag, values);
+
+                            if (englishTag.test(languageTag) === true) {
+                                english = values;
+                            }
+                        }
+
+                        if (english === null) {
+                            return Promise.reject('Can not find default (English) language.');
+                        } else {
+                            english.forEach(({key, value}) => {
+                                this.addValue(Categories.TEXT, key, value);
+                            });
                         }
                     });
             })
