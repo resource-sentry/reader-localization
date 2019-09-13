@@ -22,9 +22,11 @@ class KeyConsistency {
         let keyList;
         // First validation, just set current language as a blueprint for the future validations
         if (this.currentStructure === null) {
-            this.currentStructure = convertObjectToKeyList(language);
+            this.currentStructure = [];
+            convertObjectToKeyList(language, this.currentStructure);
         } else {
-            keyList = convertObjectToKeyList(language);
+            keyList = [];
+            convertObjectToKeyList(language, keyList);
 
             if (keyList.length > this.currentStructure.length) {
                 return Promise.reject(`Extra keys found: "${keyList.slice(this.currentStructure.length).join(', ')}"`)
