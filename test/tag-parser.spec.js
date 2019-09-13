@@ -40,4 +40,20 @@ describe('Tag Parser', () => {
         expect(parser.parse('en-US-x-twain')).toHaveProperty('privateUse', 'x-twain');
     });
 
+    it('ignores invalid language tag', () => {
+        expect(parser.parse('automobile')).toBeNull();
+    });
+
+    it('provides all segments', () => {
+        expect(parser.parse('en')).toMatchObject({
+            extlang   : null,
+            extension : null,
+            language  : 'en',
+            privateUse: null,
+            region    : null,
+            script    : null,
+            variant   : null
+        });
+    });
+
 });

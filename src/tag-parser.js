@@ -28,10 +28,7 @@ class TagParser {
         let languageTags = value.split('-');
 
         result[LanguageTags.LANGUAGE] = languageTags[0] || null;
-
-        if (languageTags.length > 1) {
-            result[LanguageTags.EXT_LANGUAGE] = languageTags.slice(1);
-        }
+        result[LanguageTags.EXT_LANGUAGE] = (languageTags.length > 1) ? languageTags.slice(1) : null;
 
         return result;
     }
