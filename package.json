@@ -1,6 +1,6 @@
 {
   "name": "@resource-sentry/reader-localization",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Resource Sentry localization JSON reader.",
   "main": "./src/index.js",
   "scripts": {
