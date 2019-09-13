@@ -29,7 +29,7 @@
     "jest": "^24.9.0"
   },
   "dependencies": {
-    "@resource-sentry/utils": "^1.1.0",
+    "@resource-sentry/utils": "^1.1.1",
     "bluebird": "^3.5.5",
     "fast-glob": "^3.0.4"
   }

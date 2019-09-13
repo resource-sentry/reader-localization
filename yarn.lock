@@ -326,10 +326,10 @@
     "@nodelib/fs.scandir" "2.1.2"
     fastq "^1.6.0"
 
-"@resource-sentry/utils@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@resource-sentry/utils/-/utils-1.1.0.tgz#c6c8dd074218a1d451db0c872f746a47d3d337f1"
-  integrity sha512-eNl2vgKVzfuhNiXaH7WlZYEzUc9U/ZhbKuFZbzayY9DYQqi36nYuhZuQsf/W/Vm5IDA7th0Lybh+Csu0hAKq8A==
+"@resource-sentry/utils@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@resource-sentry/utils/-/utils-1.1.1.tgz#5ee410dbe26df74254d4eb60bddcd7bbf0a1d264"
+  integrity sha512-zxarqjKLXVokGAcgsfhAZAD1I4Eizalg+D4sAjhAoZw7mrdm5rUzobhXV91i9dQUfsLDBdEd3ZW5anmXufdzXg==
   dependencies:
     chalk "^2.4.1"
     eventemitter3 "^3.1.0"
